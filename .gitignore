@@ -1,4 +1,3 @@
 # Ignore venv folders
 /.venv/
 /__pycache_/
-fastapi_app/main.py
