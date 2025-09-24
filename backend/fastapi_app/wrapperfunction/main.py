@@ -1,26 +1,25 @@
-from typing import Optional
 from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi
+from wrapperfunction.admin.control import admin_controller
 
 app = FastAPI()
 
-class Customer(BaseModel):
-    name: Optional[str]
-    age: Optional[int]
-    phone: Optional[str]
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins= origins,
+    allow_credentials= True, # Allow cookies/authorization headers
+    allow_methods=["*"], # Allow all HTTP methods
+    allow_headers=["*"], # Allow all headers
+    )
 
 
-@app.get("/")
-def read_root():
-    return {"message": "manyouk al dagageh "}
+app.include_router(
+    admin_controller.router,
+    prefix = "/api/v1/admin",
+    tags = ["admin"],
+    dependencies = None
+    )
 
-@app.get("/items/")
-def read_item(item_id: int= 0, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
-
-@app.post("/customer/{customer_id}")
-def read_customer(customer_id: int, customer: Customer):
-    return {
-        "customer_id": customer_id,
-        "customer": customer.name,
-        }
