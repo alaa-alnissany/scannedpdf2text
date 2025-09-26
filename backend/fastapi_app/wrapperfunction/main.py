@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi
-from wrapperfunction.admin.control import admin_controller
+from admin.control import admin_controller
 
 app = FastAPI()
 
