@@ -4,7 +4,7 @@ from admin.control import admin_controller
 
 app = FastAPI()
 
-origins = ["*"]
+origins = ["*"] 
 
 app.add_middleware(
     CORSMiddleware,
